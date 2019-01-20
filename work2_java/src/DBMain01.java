@@ -2,7 +2,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Vector;
 
 public class DBMain01 {
 	
@@ -25,17 +24,19 @@ public class DBMain01 {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String selectSQL = "SELECT PDNAME, PDSUBNAME, FACNAME, STONAME, NVL(STAMOUNT, 0) "
-				+ "FROM PRODUCT LEFT JOIN STORE (PDNO) LEFT JOIN FACTORY (FACTNO) "
+				+ "FROM PRODUCT LEFT JOIN STORE USING (PDNO) LEFT JOIN FACTORY USING (FACTNO) "
 				+ "WHERE STAMOUNT IS NULL AND FACLOC = ?";
-		Vector<Object> vec = new Vector<Object>();
 		try {
 			conn = DriverManager.getConnection(URL, USER, PASSWD);
 			pstmt = conn.prepareStatement(selectSQL);
 			pstmt.setString(1, "SEOUL");
 			rs = pstmt.executeQuery();
-			
 			while(rs.next()) {
-				
+				System.out.println(rs.getString(1)+"\t"
+						+rs.getString(2)+"\t"
+						+rs.getString(3)+"\t"
+						+rs.getString(4)+"\t"
+						+rs.getString(5)+"\t");
 			}
 			
 		} catch (Exception e) {
