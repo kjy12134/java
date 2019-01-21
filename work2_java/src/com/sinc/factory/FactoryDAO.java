@@ -15,21 +15,19 @@ public class FactoryDAO {
 	private static final String PWD = "hr";
 
 	public FactoryDAO() {
-
-	}
-
-	public List<Object> getFactoryAll() {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String selectSql = "SELECT FACTNO, FACNAME, FACLOC FROM FACTORY";
-		List<Object> obj = new Vector<>();
-
 		try {
 			Class.forName(DRIVER);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public List<FactoryVO> getFactoryAll() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String selectSql = "SELECT FACTNO, FACNAME, FACLOC FROM FACTORY";
+		List<FactoryVO> obj = new Vector<>();
 
 		try {
 			conn = DriverManager.getConnection(URL, USER, PWD);
@@ -44,8 +42,15 @@ public class FactoryDAO {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-
 		return obj;
 	}
 }

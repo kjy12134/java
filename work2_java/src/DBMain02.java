@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 public class DBMain02 {
 
 	public static final String DRIVER 	= "oracle.jdbc.driver.OracleDriver";
-	public static final String URL		= "jdbc:oracle:thin@127.0.0.1:1521:xe";
+	public static final String URL		= "jdbc:oracle:thin:@127.0.0.1:1521:xe";
 	public static final String USER 	= "hr";
 	public static final String PWD		= "hr";
 	
@@ -26,7 +26,7 @@ public class DBMain02 {
 		}
 		
 		try {
-			conn = DriverManager.getConnection(URL);
+			conn = DriverManager.getConnection(URL, USER, PWD);
 			pstmt = conn.prepareStatement(selectSql);
 			pstmt.setString(1, "TV");
 			pstmt.setString(2, "CELLPHONE");

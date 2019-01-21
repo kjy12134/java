@@ -24,8 +24,8 @@ public class DBMain01 {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String selectSQL = "SELECT PDNAME, PDSUBNAME, FACNAME, STONAME, NVL(STAMOUNT, 0) "
-				+ "FROM PRODUCT LEFT JOIN STORE USING (PDNO) LEFT JOIN FACTORY USING (FACTNO) "
-				+ "WHERE STAMOUNT IS NULL AND FACLOC = ?";
+				+ "FROM PRODUCT INNER JOIN STORE USING (PDNO) INNER JOIN FACTORY USING (FACTNO) "
+				+ "WHERE (STAMOUNT IS NULL OR STAMOUNT = 0) AND FACLOC = ?";
 		try {
 			conn = DriverManager.getConnection(URL, USER, PASSWD);
 			pstmt = conn.prepareStatement(selectSQL);

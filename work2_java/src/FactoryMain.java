@@ -2,6 +2,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.sinc.factory.FactoryBiz;
+import com.sinc.factory.FactoryVO;
 
 public class FactoryMain {
 
@@ -9,11 +10,14 @@ public class FactoryMain {
 		// TODO Auto-generated method stub
 
 		FactoryBiz biz = new FactoryBiz();
-		List<Object> list = biz.getFactoryAll();
-		Iterator<Object> ite = list.iterator();
-		
+		List<FactoryVO> list = biz.getFactoryAll();
+		Iterator<FactoryVO> ite = list.iterator();
+		FactoryVO vo = null;
 		while(ite.hasNext()) {
-			System.out.println(ite.next());
+			vo = ite.next();
+			System.out.println(vo.getFacname() +"\t"
+					+ vo.getFacno() + "\t" +
+					vo.getFacloc());
 		}
 	}
 

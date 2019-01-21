@@ -10,7 +10,7 @@ public class FactoryBiz {
 		dao = new FactoryDAO();
 	}
 	
-	public List<Object> getFactoryAll() {
+	public List<FactoryVO> getFactoryAll() {
 		return dao.getFactoryAll();
 	}
 }
